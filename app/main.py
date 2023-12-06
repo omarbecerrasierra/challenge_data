@@ -46,6 +46,7 @@ with app.app_context():
 # Step 1: upload the CSV files
 @app.route('/upload_csv', methods=['POST'])
 def upload():
+        print(request.files)
         files = request.files.getlist("files")
         # for made the load in batch is used the chunksize parameter
         for file in files: 
