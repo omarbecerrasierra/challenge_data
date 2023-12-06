@@ -101,6 +101,9 @@ def employees_per_job_department():
 
 @app.route("/metrics/departments_more_than_mean", methods=["GET"])
 def departments_more_than_mean():
+    """
+     Get the list of departments that hired more than the average number of employees
+    """
     try:
         start_date = request.args.get("start_date", "2021-01-01")
         end_date = request.args.get("end_date", "2021-12-31")
