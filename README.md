@@ -25,8 +25,8 @@ Welcome to the Globant Data Engineering Coding Challenge. In this challenge, I'v
 
 **Images Functionality**
 
-![alt-text-1](.\images\SchemaDatabase.png "title-1")
-![alt-text-2](.\images\Section_1_API.png "title-2")
+![alt-text-1](images\SchemaDatabase.png "title-1")
+![alt-text-2](images\Section_1_API.png "title-2")
 ## Section 2: SQL
 
 ### 1. Number of employees hired for each job and department in 2021 divided by quarter
@@ -39,17 +39,8 @@ Welcome to the Globant Data Engineering Coding Challenge. In this challenge, I'v
 
 **Images Functionality**
 
-![Hola ](.\images\Section_2_SQL_endpoint1.png "title-1")
-![alt-text-2](.\images\Section_2_SQL_endpoint2.png "title-2")
-
-
-
-
-
-
-
-
-
+![alt-text-1](images\Section_2_SQL_endpoint1.png "title-1")
+![alt-text-2](images\Section_2_SQL_endpoint2.png "title-2")
 
 
 **Cloud Services Used:**
