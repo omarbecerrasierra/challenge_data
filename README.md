@@ -44,25 +44,25 @@ Welcome to the Globant Data Engineering Coding Challenge. In this challenge, I'v
 ## CSV Files Structures
 
 ### hired_employees.csv
-| Field         | Type    | Description                                             |   |   |
-|---------------|---------|---------------------------------------------------------|---|---|
-| id            | INTEGER | Id of the employee                                      |   |   |
-| name          | STRING  | Name and surname of the employee                        |   |   |
-| datetime      | STRING  | Hire datetime in ISO format                             |   |   |
-| department_id | INTEGER | Id of the department which the employee was hired for   |   |   |
-| job_id        | INTEGER | Id of the job which the employee was hired for          |   |   |
+| Field         | Type    | Description                                             |
+|---------------|---------|---------------------------------------------------------|
+| id            | INTEGER | Id of the employee                                      |
+| name          | STRING  | Name and surname of the employee                        |
+| datetime      | STRING  | Hire datetime in ISO format                             |
+| department_id | INTEGER | Id of the department which the employee was hired for   |
+| job_id        | INTEGER | Id of the job which the employee was hired for          |
 
 ### departments.csv
-| Field      | Type    | Description                 |   |   |
-|------------|---------|-----------------------------|---|---|
-| id         | INTEGER | Id of the department        |   |   |
-| department | STRING  | Name of the department      |   |   |
+| Field      | Type    | Description                 |
+|------------|---------|-----------------------------|
+| id         | INTEGER | Id of the department        |
+| department | STRING  | Name of the department      |
 
 ### jobs.csv
-| Field | Type    | Description           |   |   |
-|-------|---------|-----------------------|---|---|
-| id    | INTEGER | Id of the job          |   |   |
-| job   | STRING  | Name of the job         |   |   |
+| Field | Type    | Description           |
+|-------|---------|-----------------------|
+| id    | INTEGER | Id of the job          |
+| job   | STRING  | Name of the job         |
 
 
 ## Conclusion
