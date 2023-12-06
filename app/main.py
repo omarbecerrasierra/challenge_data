@@ -63,5 +63,67 @@ def upload():
         
         return jsonify({"message": "Files uploaded successfully"}), 200
 
+# Step 2: get the list of departments
+@app.route("/metrics/employees_per_job_department", methods=["GET"])
+def employees_per_job_department():
+    try:
+        start_date = request.args.get("start_date", "2021-01-01")
+        end_date = request.args.get("end_date", "2021-12-31")
+        print(start_date, end_date)
+        sql_query = text("""
+            SELECT
+                department,
+                job,
+                COUNT(hired_employee.id) AS hired,
+                EXTRACT(quarter FROM datetime) AS quarter
+            FROM hired_employee
+            JOIN department ON department.id = hired_employee.department_id
+            JOIN job ON job.id = hired_employee.job_id
+            WHERE datetime BETWEEN :start_date AND :end_date
+            GROUP BY department, job, quarter
+            ORDER BY department, job, quarter
+            """)
+    
+        result = db.session.execute(sql_query, {"start_date": start_date, "end_date": end_date}).fetchall()
+
+        data = {}
+        for row in result:
+            key = (row.department, row.job)
+            if key not in data:
+                data[key] = {'Q1': 0, 'Q2': 0, 'Q3': 0, 'Q4': 0}
+            data[key][f'Q{row.quarter}'] = row.hired
+
+        output = [{'department': department, 'job': job, **quarters} for (department, job), quarters in data.items()]
+        return jsonify(output)
+    except Exception as e:
+        return jsonify({"error": "Invalid request"}), 400
+
+@app.route("/metrics/departments_more_than_mean", methods=["GET"])
+def departments_more_than_mean():
+    try:
+        start_date = request.args.get("start_date", "2021-01-01")
+        end_date = request.args.get("end_date", "2021-12-31")
+        sql_query =  text("""
+            SELECT id, department, hired
+            FROM (
+                SELECT
+                    department.id AS id,
+                    department.department AS department,
+                    COUNT(hired_employee.id) AS hired,
+                    AVG(COUNT(hired_employee.id)) OVER () AS avg_hired
+                FROM department
+                JOIN hired_employee ON department.id = hired_employee.department_id
+                WHERE hired_employee.datetime BETWEEN :start_date AND :end_date
+                GROUP BY department.id, department.department
+            ) subquery
+            WHERE hired > avg_hired
+            ORDER BY hired DESC
+            """)
+
+        result = db.session.execute(sql_query, {"start_date": start_date, "end_date": end_date}).fetchall()
+        output = [{'id': row.id, 'department': row.department, 'hired': row.hired} for row in result]
+        return jsonify(output)
+    except ValueError:
+        return jsonify({"error": "Invalid date format"}), 400
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)
