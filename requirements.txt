@@ -1,0 +1,8 @@
+Flask===2.2.2
+Flask-SQLAlchemy===2.5.1
+Flask-Migrate==4.0.0
+SQlAlchemy==1.4.42
+psycopg2==2.9.3
+numpy==1.25.2
+pandas==2.0.3
+python-dotenv==1.0.0
