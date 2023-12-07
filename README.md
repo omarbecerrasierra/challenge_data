@@ -43,14 +43,71 @@ Welcome to the Globant Data Engineering Coding Challenge. In this challenge, I'v
 ![alt-text-2](images/Section_2_SQL_endpoint2.png )
 
 
-**Cloud Services Used:**
-- [AWS](https://aws.amazon.com/es/)
+## Section 3: Bonus Track! Cloud, Testing & Containers
 
 **Testing Library Used:**
 - [unittest](https://docs.python.org/3/library/unittest.html)
 
+### Unit Test: Uploading CSV Files and Database Population
 
-## CSV Files Structures
+
+This unit test focuses on the functionality of uploading CSV files containing department, job, and hired employee data to the Flask application. The test ensures that the uploaded data is correctly stored in the associated database tables (Department, Job, and HiredEmployee).
+
+## Steps
+
+1. **Database Setup:**
+   - The test creates the necessary database tables using `db.create_all()` within the Flask application context.
+
+2. **CSV File Creation:**
+   - Three mock CSV files are created, each containing sample data for departments, jobs, and hired employees.
+
+3. **FileStorage Objects:**
+   - FileStorage objects are generated for each CSV file, simulating file uploads during a POST request.
+
+4. **File Upload and Database Population:**
+   - The Flask test client sends a POST request to the `/upload_csv` endpoint with the simulated file uploads.
+   - The response status code and JSON message are checked to ensure successful file uploads.
+
+5. **Database Verification:**
+   - The test queries the database tables (Department, Job, and HiredEmployee) to verify that the uploaded data matches the expected values.
+
+## Test Methods
+
+1. **test_upload_csv_success:**
+   - Validates successful file uploads and checks if the data is correctly populated in the database.
+
+2. **test_upload_csv_invalid_file:**
+   - Verifies that attempting to upload an invalid file results in an appropriate error response.
+
+3. **test_upload_csv_missing_data:**
+   - Ensures that missing data in one of the CSV files leads to an invalid request response, and the database remains unchanged.
+
+## Running the Test
+
+To run the unit test, execute the following command in the terminal:
+
+```bash
+python test_app.py
+```
+![alt-text-2](images/unit_tests.png)
+
+### DockerFile
+To build and run the application locally, create the **.env**
+To build the image, execute the following command:
+```bash
+docker-compose build
+```
+To run the services, execute the following command:
+```bash
+docker-compose up -d
+```
+To run database migrations, execute the following commands:
+```bash
+docker-compose run --rm web flask db init
+docker-compose run --rm web flask db migrate
+docker-compose run --rm web flask db upgrade
+```
+## The CSV Files Structures
 
 ### hired_employees.csv
 | Field         | Type    | Description                                             |
@@ -70,8 +127,10 @@ Welcome to the Globant Data Engineering Coding Challenge. In this challenge, I'v
 ### jobs.csv
 | Field | Type    | Description           |
 |-------|---------|-----------------------|
-| id    | INTEGER | Id of the job          |
-| job   | STRING  | Name of the job         |
+| id    | INTEGER | Id of the job         |
+| job   | STRING  | Name of the job       |
+
+
 
 
 ## Conclusion
